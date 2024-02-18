@@ -1,8 +1,21 @@
-
+"use client"
+import { addTask } from "@/lib/features/tasks/tasksSlice"
+import { AppDispatch } from "@/lib/store"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { UseDispatch } from "react-redux"
 
 type Props = {}
 
 export default function AddTask({ }: Props) {
+    const [title, setTitle] = useState('')
+    const [desc, setDesc] = useState('')
+    const dispatch = useDispatch<AppDispatch>()
+
+    const handleTaskSubmit = (e) => {
+        e.preventDefault()
+        dispatch(addTask(title))
+    }
     return (
 
 
@@ -15,7 +28,7 @@ export default function AddTask({ }: Props) {
                         </svg>
                         <h1 className="tracking-wide text-3xl text-gray-900">Add Task</h1>
                     </div>
-                    <form id="login_form" action="api_login" method="POST"
+                    <form onSubmit={handleTaskSubmit}
                         className="flex flex-col justify-center">
                         {/* <div className="flex justify-between items-center mb-3">
                             <div className="inline-flex items-center self-start">
@@ -48,7 +61,9 @@ export default function AddTask({ }: Props) {
                             </div>
                         </div> */}
                         <label className="text-sm font-medium text-black">Title</label>
-                        <input className="mb-3 px-2 py-1.5
+                        <input
+                            onChange={(e) => setTitle(e.target.value)}
+                            className="mb-3 px-2 py-1.5
                             mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
                             focus:outline-none
                             focus:border-sky-500

@@ -1,18 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
-    tasks: Array<string>
+    tasks: Array<string>,
+    title: string,
+    desc: string,
 }
 
 
 const initialState = {
-    tasks: []
+    tasks: [],
+    title: '',
+    desc: '',
 } as InitialState
 
 export const tasks = createSlice({
     name: "tasks",
     initialState,
     reducers: {
-
+        addTask: (state, action: PayloadAction<string>) => {
+            return {
+                title: action.payload,
+                desc: action.payload,
+            }
+        }
     }
 });
+
+export const { addTask } = tasks.actions
+export default tasks.reducer
