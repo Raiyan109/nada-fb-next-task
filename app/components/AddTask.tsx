@@ -11,7 +11,7 @@ export default function AddTask({ }: Props) {
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const dispatch = useDispatch<AppDispatch>()
-    const titlee = useAppSelector((state) => state.tasksSlice.title)
+    const titlee = useAppSelector((state) => state.tasksSlice.tasks)
     console.log(titlee);
 
     const handleTaskSubmit = (e: { preventDefault: () => void }) => {
@@ -22,12 +22,16 @@ export default function AddTask({ }: Props) {
 
 
         <div className="bg-gradient-to-tr from-slate-300 to-black-500">
-            <h1>Title:{titlee}</h1>
+            {
+                titlee.map((item) => (
+                    <h1 key={item}>{item}</h1>
+                ))
+            }
             <section id="login" className="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto">
                 <div className="p-6 bg-sky-100 rounded">
                     <div className="flex items-center justify-center font-black m-3 mb-12">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 mr-3 text-red-600 animate-pulse" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                         </svg>
                         <h1 className="tracking-wide text-3xl text-gray-900">Add Task</h1>
                     </div>
@@ -37,14 +41,14 @@ export default function AddTask({ }: Props) {
                             <div className="inline-flex items-center self-start">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 mr-3 bg-gradient-to-r from-pink-600 to-red-600 shadow-lg rounded p-1.5 text-gray-100" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M13 7H7v6h6V7z" />
-                                    <path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd" />
+                                    <path fillRule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clipRule="evenodd" />
                                 </svg>
                                 <span className="font-bold text-gray-900">$5 / Core</span>
                             </div>
                             <div className="flex">
                                 <button type="button" className="bg-yellow-600 p-1.5 font-bold rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                        <path fillRule="evenodd" d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z" clipRule="evenodd" />
                                     </svg>
                                 </button>
 
@@ -58,7 +62,7 @@ export default function AddTask({ }: Props) {
 
                                 <button type="button" className="bg-green-600 p-1.5 font-bold rounded">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                        <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                                     </svg>
                                 </button>
                             </div>
