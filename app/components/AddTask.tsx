@@ -26,11 +26,7 @@ export default function AddTask({ }: Props) {
 
 
         <div className="bg-gradient-to-tr from-slate-300 to-black-500">
-            {
-                tasks.map((item) => (
-                    <h1 key={item.title}>{item.title}</h1>
-                ))
-            }
+
             <section id="login" className="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto">
                 <div className="p-6 bg-sky-100 rounded">
                     <div className="flex items-center justify-center font-black m-3 mb-12">
@@ -100,7 +96,16 @@ export default function AddTask({ }: Props) {
                 </div>
             </section>
 
-
+            <div className="flex justify-center items-center border-red-500 border-2 w-32 rounded-xl">
+                {
+                    tasks.map((item) => (
+                        <div key={item.title}>
+                            <h1 >Title: {item.title}</h1>
+                            <h1 > Description: {item.desc}</h1>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     )
 }
