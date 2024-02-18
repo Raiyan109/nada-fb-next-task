@@ -1,9 +1,9 @@
 "use client"
 import { addTask } from "@/lib/features/tasks/tasksSlice"
-import { AppDispatch } from "@/lib/store"
+import { AppDispatch, RootState } from "@/lib/store"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { UseDispatch } from "react-redux"
+import { useAppSelector } from '@/lib/store'
 
 type Props = {}
 
@@ -11,8 +11,10 @@ export default function AddTask({ }: Props) {
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const dispatch = useDispatch<AppDispatch>()
+    const titlee = useAppSelector((state) => state.tasksSlice.title)
+    console.log(titlee);
 
-    const handleTaskSubmit = (e) => {
+    const handleTaskSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
         dispatch(addTask(title))
     }
@@ -20,6 +22,7 @@ export default function AddTask({ }: Props) {
 
 
         <div className="bg-gradient-to-tr from-slate-300 to-black-500">
+            <h1>Title:{titlee}</h1>
             <section id="login" className="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto">
                 <div className="p-6 bg-sky-100 rounded">
                     <div className="flex items-center justify-center font-black m-3 mb-12">
@@ -63,13 +66,12 @@ export default function AddTask({ }: Props) {
                         <label className="text-sm font-medium text-black">Title</label>
                         <input
                             onChange={(e) => setTitle(e.target.value)}
-                            className="mb-3 px-2 py-1.5
-                            mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
+                            className="mb-3 px-2 py-1.5 mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
                             focus:outline-none
                             focus:border-sky-500
                             focus:ring-1
                             focus:ring-sky-500
-                            focus:invalid:border-red-500 focus:invalid:ring-red-500" type="text" name="username" placeholder="title" />
+                            focus:invalid:border-red-500 focus:invalid:ring-red-500 text-black" type="text" name="username" placeholder="title" />
                         <label className="text-sm font-medium text-black">Description</label>
                         <textarea className="
                             mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -77,7 +79,7 @@ export default function AddTask({ }: Props) {
                             focus:border-sky-500
                             focus:ring-1
                             focus:ring-sky-500
-                            focus:invalid:border-red-500 focus:invalid:ring-red-500" name="messages" placeholder="Write something"></textarea>
+                            focus:invalid:border-red-500 focus:invalid:ring-red-500 text-black" name="messages" placeholder="Write something"></textarea>
                         <button className="px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-pink-600 to-red-600 font-medium text-gray-100 block transition duration-300" type="submit">
                             <span id="login_process_state" className="hidden">Sending</span>
                             <span id="login_default_state">Add<span id="subtotal"></span></span>
