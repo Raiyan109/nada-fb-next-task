@@ -11,20 +11,24 @@ export default function AddTask({ }: Props) {
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const dispatch = useDispatch<AppDispatch>()
-    const titlee = useAppSelector((state) => state.tasksSlice.tasks)
-    console.log(titlee);
+    const tasks = useAppSelector((state) => state.tasksSlice.tasks)
+    console.log(tasks);
 
     const handleTaskSubmit = (e: { preventDefault: () => void }) => {
         e.preventDefault()
-        dispatch(addTask(title))
+        dispatch(addTask({ title, desc }));
+
+        // Clear the inputs after adding task
+        setTitle('');
+        setDesc('');
     }
     return (
 
 
         <div className="bg-gradient-to-tr from-slate-300 to-black-500">
             {
-                titlee.map((item) => (
-                    <h1 key={item}>{item}</h1>
+                tasks.map((item) => (
+                    <h1 key={item.title}>{item.title}</h1>
                 ))
             }
             <section id="login" className="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto">
@@ -70,6 +74,7 @@ export default function AddTask({ }: Props) {
                         <label className="text-sm font-medium text-black">Title</label>
                         <input
                             onChange={(e) => setTitle(e.target.value)}
+                            value={title}
                             className="mb-3 px-2 py-1.5 mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
                             focus:outline-none
                             focus:border-sky-500
@@ -77,7 +82,10 @@ export default function AddTask({ }: Props) {
                             focus:ring-sky-500
                             focus:invalid:border-red-500 focus:invalid:ring-red-500 text-black" type="text" name="username" placeholder="title" />
                         <label className="text-sm font-medium text-black">Description</label>
-                        <textarea className="
+                        <textarea
+                            onChange={(e) => setDesc(e.target.value)}
+                            value={desc}
+                            className="
                             mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
                             focus:outline-none
                             focus:border-sky-500
